@@ -11,6 +11,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { RefreshCw } from "lucide-react";
+import { ModelSelect } from "./model-select";
 import { NavUser } from "./nav-user";
 
 const user = {
@@ -24,6 +25,7 @@ export function AppSidebar() {
     <Sidebar variant="floating" collapsible="icon">
       <SidebarHeader>
         <SidebarTrigger />
+        <ModelSelect />
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
