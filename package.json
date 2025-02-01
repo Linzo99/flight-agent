@@ -4,12 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@huggingface/transformers": "^3.3.2",
     "@llamaindex/workflow": "^0.0.8",
     "@radix-ui/react-accordion": "^1.2.2",
     "@radix-ui/react-avatar": "^1.1.2",
@@ -30,22 +31,30 @@
     "json-schema-to-zod": "^2.6.0",
     "llamaindex": "^0.8.31",
     "lucide-react": "^0.462.0",
-    "next": "14.2.6",
+    "next": "15.1.6",
     "next-themes": "^0.4.4",
-    "react": "18",
-    "react-dom": "18",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "sharp": "^0.33.5",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.24.1",
+    "zod-to-json-schema": "^3.24.1",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@types/node": "^20.17.16",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
+    "@types/react": "19.0.8",
+    "@types/react-dom": "19.0.3",
     "eslint": "^9.19.0",
     "postcss": "^8.5.1",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "19.0.8",
+      "@types/react-dom": "19.0.3"
+    }
   }
 }

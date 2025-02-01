@@ -10,7 +10,7 @@ export const ChatStoreContext = createContext<StoreApi<StoreState> | null>(
 );
 
 export const ChatStoreProvider = ({ children }: { children: ReactNode }) => {
-  const storeRef = useRef<StoreApi<StoreState>>();
+  const storeRef = useRef<StoreApi<StoreState>>(undefined);
   if (!storeRef.current) storeRef.current = createChatStore();
 
   return (

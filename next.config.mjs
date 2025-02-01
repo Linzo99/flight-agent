@@ -1,10 +1,6 @@
 import withLlamaIndex from "llamaindex/next";
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  experimental: {
-    serverComponentsExternalPackages: ["@acme/ui"],
-  },
-};
+const nextConfig = {};
 
 export default withLlamaIndex(nextConfig);
