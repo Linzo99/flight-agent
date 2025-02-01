@@ -1,8 +1,8 @@
 "use server";
 
-import flyAgent from "@/fyf/agent";
-import { FlightSearchParams } from "@/fyf/kiwi/types";
-import { systemTemplate } from "@/fyf/prompt";
+import flyAgent from "@/flight/agent";
+import { FlightSearchParams } from "@/flight/kiwi/types";
+import { systemTemplate } from "@/flight/prompt";
 import { Message } from "@/lib/types";
 import { ChatMessage, Gemini, GEMINI_MODEL, GeminiSession } from "llamaindex";
 //@ts-ignore

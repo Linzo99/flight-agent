@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { FlightData } from "@/fyf/kiwi/types";
+import { FlightData } from "@/flight/kiwi/types";
 import { ChatMessage } from "llamaindex";
 
 export type Flight = z.infer<typeof FlightData>;
