@@ -1,24 +1,14 @@
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { RefreshCw } from "lucide-react";
 import { ModelSelect } from "./model-select";
-import { NavUser } from "./nav-user";
-
-const user = {
-  name: "shadcn",
-  email: "m@example.com",
-  avatar: "/avatars/shadcn.jpg",
-};
+import ResetButton from "./reset-button";
 
 export function AppSidebar() {
   return (
@@ -31,21 +21,11 @@ export function AppSidebar() {
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton className="cursor-pointer" asChild>
-                  <div>
-                    <RefreshCw />
-                    <span>Delete Chat</span>
-                  </div>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              <ResetButton />
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={user} />
-      </SidebarFooter>
     </Sidebar>
   );
 }

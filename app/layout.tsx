@@ -3,9 +3,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
+import { ChatStoreProvider } from "@/components/providers/chat-provider";
 
 export const metadata: Metadata = {
-  title: "SenFlight",
+  title: "FyF",
   description: "Find your flight",
 };
 
@@ -23,13 +24,15 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SidebarProvider defaultOpen={false}>
-            <AppSidebar />
-            <main className="w-full">
-              <SidebarTrigger className="absolute top-2 left-2 md:hidden" />
-              {children}
-            </main>
-          </SidebarProvider>
+          <ChatStoreProvider>
+            <SidebarProvider defaultOpen={false}>
+              <AppSidebar />
+              <main className="w-full">
+                <SidebarTrigger className="absolute top-2 left-2 md:hidden" />
+                {children}
+              </main>
+            </SidebarProvider>
+          </ChatStoreProvider>
         </ThemeProvider>
       </body>
     </html>

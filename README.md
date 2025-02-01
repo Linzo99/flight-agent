@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FyF - AI-Powered Flight Search
+
+A modern, AI-powered flight search application built with Next.js that allows users to find flights using natural language conversations.
+
+## Features
+
+- 🤖 Natural Language Flight Search
+- ✈️ Real-time Flight Information
+- 📱 Responsive Design
+
+## Tech Stack
+
+- **Framework**: Next.js 14 with App Router
+- **LLM Framework**: LlamaIndex (TS)
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui
+- **State Management**: Zustand
+- **Animations**: Framer Motion
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository:
+
+```bash
+git clone https://github.comLinzo99/flight_bot.git
+cd [folder]
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+# or
+pnpm install
+```
+
+3. Set up environment variables:
+
+```bash
+cp env_template .env.local
+```
+
+4. Start the development server:
 
 ```bash
 npm run dev
 # or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+├── actions/          # Server actions
+├── app/             # Next.js app directory
+├── components/      # React components
+│   ├── ui/         # Reusable UI components
+│   └── providers/  # Context providers
+├── hooks/          # Custom React hooks
+├── lib/            # Utility functions and types
+└── public/         # Static assets
+```
 
-## Learn More
+## Key Features Explained
 
-To learn more about Next.js, take a look at the following resources:
+### Natural Language Search
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Users can search for flights using natural language queries like "Find me the cheapest flight from New York to London next week" instead of filling out traditional form fields.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Real-time Flight Information
 
-## Deploy on Vercel
+The application provides comprehensive flight details including:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Departure and arrival times
+- Flight duration
+- Baggage allowance
+- Price breakdown
+- Airline information
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Responsive Design
+
+The application is fully responsive and works seamlessly across:
+
+- Desktop computers
+- Tablets
+- Mobile devices
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- [Next.js](https://nextjs.org/)
+- [LlamaIndex](https://ts.llamaindex.ai/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [shadcn/ui](https://ui.shadcn.com/)
+- [Framer Motion](https://www.framer.com/motion/)

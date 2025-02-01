@@ -23,7 +23,7 @@ export const ChatStoreProvider = ({ children }: { children: ReactNode }) => {
 export const useChat = <T,>(selector: (store: StoreState) => T): T => {
   const context = useContext(ChatStoreContext);
   if (!context)
-    throw new Error("useFilter must be used inside a FilterStoreProvider");
+    throw new Error("useChat must be used inside a ChatStoreProvider");
 
   return useStore(context, selector);
 };

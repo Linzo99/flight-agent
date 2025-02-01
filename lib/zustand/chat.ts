@@ -1,4 +1,4 @@
-import { create_task } from "@/actions";
+import { makeChat } from "@/app/actions";
 import { Message } from "@/lib/types";
 import { createStore } from "zustand";
 import { persist } from "zustand/middleware";
@@ -8,6 +8,7 @@ export interface StoreData {
   isLoading: boolean;
   total_session: number;
   sessions: Record<string, Message[]>;
+  apiKey: string;
 }
 
 export interface StoreActions {
@@ -16,11 +17,13 @@ export interface StoreActions {
   append: (message: Message) => void;
   setMessages: (messages: Message[]) => void;
   getMessages: () => Message[];
+  setApiKey: (apiKey: string) => void;
 }
 
 export type StoreState = StoreData & StoreActions;
 export const initialState = {
   input: "",
+  apiKey: "",
   isLoading: false,
   total_session: 0,
   sessions: { 0: [] },
@@ -33,13 +36,15 @@ export const createChatStore = (initProps: StoreData = initialState) => {
         ...initProps,
         // actions
         setInput: (text) => set({ input: text }),
+        setApiKey: (apiKey) => set({ apiKey }),
         handleSubmit: () => {
           const { input, append } = get();
           append({ role: "user", content: input });
           set({ input: "" });
         },
 
-        setMessages: (messages) => set({ sessions: { 0: messages } }),
+        setMessages: (messages) =>
+          set({ sessions: { 0: messages }, total_session: 0 }),
 
         getMessages: () => {
           const { total_session, sessions } = get();
@@ -48,18 +53,18 @@ export const createChatStore = (initProps: StoreData = initialState) => {
             .flat();
         },
         append: (message) => {
+          // I know this is Lazy :(
+          const apiKey = get().apiKey;
           const total = get().total_session;
           const old_msgs = () => get().sessions[total];
           set({
             isLoading: true,
             sessions: { ...get().sessions, [total]: [...old_msgs(), message] },
           });
-          // create the workflow task
-          create_task({
-            chat_history: old_msgs(), // the history
-          })
+          // call the workflow
+          makeChat(old_msgs(), apiKey)
             .then((content) => {
-              const result = JSON.parse(content);
+              const result = content;
               set({
                 sessions: {
                   ...get().sessions,

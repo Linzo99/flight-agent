@@ -1,7 +1,7 @@
-import type { NextConfig } from "next";
+// next.config.mjs / next.config.ts
+import withLlamaIndex from "llamaindex/next";
 
-const nextConfig: NextConfig = {
-  /* config options here */
-};
+/** @type {import('next').NextConfig} */
+const nextConfig = {};
 
-export default nextConfig;
+export default withLlamaIndex(nextConfig);
