@@ -1,4 +1,3 @@
-import React from "react";
 import { format, parseISO } from "date-fns";
 import {
   AlertTriangle,
@@ -30,7 +29,7 @@ import {
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-import { FlightData } from "@/lib/types";
+import { Flight as FlightData } from "@/lib/types";
 
 // Utility functions moved out of component for better performance and readability
 const formatDuration = (seconds: number): string => {
@@ -56,7 +55,7 @@ const FlightHeader = ({ flight }: { flight: FlightData }) => (
       <Badge variant="secondary" className="mr-2">
         {flight.airlines?.join(", ") || "Unknown Airline"}
       </Badge>
-      <Badge variant="outline">{flight.availability.seats} seats left</Badge>
+      <Badge variant="outline">{flight?.availability?.seats} seats left</Badge>
     </div>
   </div>
 );
@@ -67,7 +66,7 @@ const FlightTimeInfo = ({ flight }: { flight: FlightData }) => (
     <div className="flex flex-col">
       <span className="text-sm text-muted-foreground">Departure</span>
       <span className="font-semibold">
-        {formatDateTime(flight.local_departure)}
+        {formatDateTime(flight.local_departure || "")}
       </span>
       <span className="text-sm">
         {flight.cityFrom} ({flight.flyFrom})
@@ -83,7 +82,7 @@ const FlightTimeInfo = ({ flight }: { flight: FlightData }) => (
     <div className="flex flex-col text-right">
       <span className="text-sm text-muted-foreground">Arrival</span>
       <span className="font-semibold">
-        {formatDateTime(flight.local_arrival)}
+        {formatDateTime(flight.local_arrival || "")}
       </span>
       <span className="text-sm">
         {flight.cityTo} ({flight.flyTo})
@@ -139,11 +138,11 @@ const FlightDetailsDialog = ({ flight }: { flight: FlightData }) => (
                 {flight.cityFrom} to {flight.cityTo}
               </h2>
               <p className="text-muted-foreground">
-                {formatDateTime(flight.local_departure)}
+                {formatDateTime(flight.local_departure!)}
               </p>
             </div>
             <Badge variant="outline" className="text-lg px-3 py-1">
-              ${flight.price.toFixed(2)}
+              ${flight.price!.toFixed(2)}
             </Badge>
           </div>
 
@@ -151,7 +150,7 @@ const FlightDetailsDialog = ({ flight }: { flight: FlightData }) => (
           <div className="flex items-center justify-between bg-muted p-4 rounded-lg">
             <div className="text-center">
               <p className="text-2xl font-bold">
-                {formatDateTime(flight.local_departure)}
+                {formatDateTime(flight.local_departure!)}
               </p>
               <p className="text-sm font-medium">{flight.cityFrom}</p>
               <p className="text-xs text-muted-foreground">{flight.flyFrom}</p>
@@ -169,7 +168,7 @@ const FlightDetailsDialog = ({ flight }: { flight: FlightData }) => (
             </div>
             <div className="text-center">
               <p className="text-2xl font-bold">
-                {formatDateTime(flight.local_arrival)}
+                {formatDateTime(flight.local_arrival!)}
               </p>
               <p className="text-sm font-medium">{flight.cityTo}</p>
               <p className="text-xs text-muted-foreground">{flight.flyTo}</p>
@@ -185,7 +184,7 @@ const FlightDetailsDialog = ({ flight }: { flight: FlightData }) => (
                 <div>
                   <p className="text-sm font-medium">Departure</p>
                   <p className="text-xs text-muted-foreground">
-                    {formatDateTime(flight.local_departure)}
+                    {formatDateTime(flight.local_departure!)}
                   </p>
                 </div>
               </div>
@@ -194,7 +193,7 @@ const FlightDetailsDialog = ({ flight }: { flight: FlightData }) => (
                 <div>
                   <p className="text-sm font-medium">Arrival</p>
                   <p className="text-xs text-muted-foreground">
-                    {formatDateTime(flight.local_arrival)}
+                    {formatDateTime(flight.local_arrival!)}
                   </p>
                 </div>
               </div>
@@ -247,9 +246,7 @@ const FlightDetailsDialog = ({ flight }: { flight: FlightData }) => (
                 <p className="text-sm font-medium">Additional Baggage Fees:</p>
                 <ul className="list-disc list-inside text-xs text-muted-foreground">
                   {Object.entries(flight.bags_price).map(([bags, price]) => (
-                    <li key={bags}>
-                      {bags} bag(s): ${price}
-                    </li>
+                    <li key={bags}>{`${bags} bag(s): ${price}`}</li>
                   ))}
                 </ul>
               </div>
@@ -280,7 +277,7 @@ const FlightDetailsDialog = ({ flight }: { flight: FlightData }) => (
               </div>
               <div className="flex justify-between">
                 <p className="text-sm font-bold">Total Price</p>
-                <p className="text-sm font-bold">${flight.price.toFixed(2)}</p>
+                <p className="text-sm font-bold">${flight.price!.toFixed(2)}</p>
               </div>
             </div>
           </section>
@@ -339,7 +336,7 @@ const FlightDetailsDialog = ({ flight }: { flight: FlightData }) => (
                 <div>
                   <p className="text-sm font-medium">Quality Score</p>
                   <p className="text-xs text-muted-foreground">
-                    {flight.quality.toFixed(2)}
+                    {flight.quality?.toFixed(2)}
                   </p>
                 </div>
               </div>
@@ -377,7 +374,7 @@ export default function FlightDetails({ flight }: { flight: FlightData }) {
           <div className="flex items-center">
             <CreditCard className="mr-2 text-primary" />
             <span className="text-xl font-bold">
-              ${flight.price.toFixed(2)}
+              ${flight.price!.toFixed(2)}
             </span>
           </div>
           <FlightDetailsDialog flight={flight} />
