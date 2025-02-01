@@ -5,11 +5,12 @@ import { PreviewMessage, ThinkingMessage } from "@/components/messages";
 import { Overview } from "@/components/overview";
 import { useChat } from "@/components/providers/chat-provider";
 import { useScrollToBottom } from "@/hooks/use-scroll-to-bottom";
+import { ResultMessage } from "@/lib/types";
 import { useShallow } from "zustand/shallow";
 
 export function Chat() {
   const [getMessages, isLoading] = useChat(
-    useShallow((state) => [state.getMessages, state.isLoading]),
+    useShallow((state) => [state.getMessages, state.isLoading, state.sessions]),
   );
 
   const messages = getMessages();
@@ -28,7 +29,7 @@ export function Chat() {
           {messages.map((message, idx) => (
             <PreviewMessage
               key={idx}
-              message={message}
+              message={message as ResultMessage}
               isLoading={isLoading && messages.length - 1 === idx}
             />
           ))}
@@ -44,7 +45,7 @@ export function Chat() {
             className="shrink-0 min-w-[24px] min-h-[24px]"
           />
         </div>
-        <form className="flex mx-auto px-4 bg-background pb-4 md:pb-6 gap-2 w-full md:max-w-3xl">
+        <form className="flex mx-auto px-2 bg-background pb-4 md:pb-6 gap-2 w-full md:max-w-3xl">
           <ChatInput />
         </form>
       </div>

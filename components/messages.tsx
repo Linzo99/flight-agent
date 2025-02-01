@@ -1,6 +1,6 @@
 "use client";
 
-import { FlightData, Message } from "@/lib/types";
+import { Flight, ResultMessage } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import FlightDetails from "./flight-details";
@@ -8,7 +8,7 @@ import FlightDetails from "./flight-details";
 export const PreviewMessage = ({
   message,
 }: {
-  message: Message;
+  message: ResultMessage;
   isLoading: boolean;
 }) => {
   if (typeof message.content == "string") message.isFinal = false;
@@ -43,10 +43,10 @@ export const PreviewMessage = ({
         )}
         <div className="flex flex-col gap-2 w-full">
           {message.isFinal == false ? (
-            <p>{message.content}</p>
+            <p>{message.content as string}</p>
           ) : (
             <div className="flex flex-col gap-y-2">
-              {message.content.data.map((f: FlightData) => (
+              {(message.content as Flight[]).map((f) => (
                 <FlightDetails key={f.id} flight={f} />
               ))}
             </div>
