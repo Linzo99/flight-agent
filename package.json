@@ -10,7 +10,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@huggingface/transformers": "^3.3.2",
     "@llamaindex/workflow": "^0.0.8",
     "@radix-ui/react-accordion": "^1.2.2",
     "@radix-ui/react-avatar": "^1.1.2",
