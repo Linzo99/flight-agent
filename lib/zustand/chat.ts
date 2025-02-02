@@ -1,4 +1,3 @@
-import { makeChat } from "@/app/actions";
 import { Message } from "@/lib/types";
 import { createStore } from "zustand";
 import { persist } from "zustand/middleware";
@@ -62,9 +61,13 @@ export const createChatStore = (initProps: StoreData = initialState) => {
             sessions: { ...get().sessions, [total]: [...old_msgs(), message] },
           });
           // call the workflow
-          makeChat(old_msgs(), apiKey)
-            .then((content) => {
-              const result = content;
+          fetch("/api/chat", {
+            method: "POST",
+            body: JSON.stringify({ messages: old_msgs(), apiKey }),
+          })
+            .then(async (content) => {
+              const result = await content.json();
+              console.log(result);
               set({
                 sessions: {
                   ...get().sessions,
